@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/allPostsFragment">
+
+    <fragment
+        android:id="@+id/allPostsFragment"
+        android:name="com.example.trellandroid.ui.allposts.AllPostsFragment"
+        android:label="AllPostsFragment" >
+        <action
+            android:id="@+id/action_allPostsFragment_to_postDetailFragment"
+            app:destination="@id/postDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/postDetailFragment"
+        android:name="com.example.trellandroid.ui.postdetail.PostDetailFragment"
+        android:label="PostDetailFragment" >
+        <action
+            android:id="@+id/action_postDetailFragment_to_commentsBottomSheetFragment"
+            app:destination="@id/commentsBottomSheetFragment" />
+        <action
+            android:id="@+id/action_postDetailFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/commentsBottomSheetFragment"
+        android:name="com.example.trellandroid.ui.comments.CommentsBottomSheetFragment"
+        android:label="CommentsBottomSheetFragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.trellandroid.ui.profile.ProfileFragment"
+        android:label="ProfileFragment" />
+</navigation>
