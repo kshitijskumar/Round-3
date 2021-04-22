@@ -1,13 +1,17 @@
 package com.example.trellandroid.data.api
 
+import com.example.trellandroid.data.responses.VlogResponse
 import com.example.trellandroid.utils.Constants.BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Response
 import retrofit2.Retrofit
 
 interface ApiService {
 
+    suspend fun getAllVlogs() : Response<List<VlogResponse>>
 
+    suspend fun setInterestScore(vlogId: Double, score: Int) : Response<Unit>
 
     companion object {
         private val loggingInterceptor = HttpLoggingInterceptor().apply {
@@ -22,6 +26,6 @@ interface ApiService {
             .client(client)
             .build()
 
-        fun getApiService() = retrofit.create(ApiService::class.java)
+        fun getApiService(): ApiService = retrofit.create(ApiService::class.java)
     }
 }
