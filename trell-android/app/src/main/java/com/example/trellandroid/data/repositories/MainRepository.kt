@@ -13,6 +13,7 @@ interface MainRepository {
     //demo functions that won't be calling any api in MVP but will be required in actual app
     suspend fun fetchAllComments(vlogId: Double) : Result<List<CommentResponse>>
     suspend fun getProfile(userId: Double) : Result<UserResponse>
+    suspend fun getVlogDetails(vlogId: Long) : Result<VlogResponse>
 
 
 }

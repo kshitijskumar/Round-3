@@ -33,4 +33,9 @@ class MainRepositoryImpl(
         delay(2000L)
         return Result.Success(DummyResponses.dummyUserResponse)
     }
+
+    override suspend fun getVlogDetails(vlogId: Long): Result<VlogResponse> {
+        delay(2000L)
+        return Result.Success(DummyResponses.dummyVlogResponse)
+    }
 }

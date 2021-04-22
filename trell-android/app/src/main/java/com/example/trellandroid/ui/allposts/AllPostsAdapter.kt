@@ -2,9 +2,11 @@ package com.example.trellandroid.ui.allposts
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.trellandroid.data.responses.VlogResponse
 import com.example.trellandroid.databinding.HolderSinglePostBinding
 
@@ -39,10 +41,17 @@ class AllPostsAdapter(
         fun setDataToHolder(item: VlogResponse) {
             binding.apply {
                 tvName.text = item.creatorName
+                setImage(item.creatorImgUrl, binding.ivUser)
             }
             binding.root.setOnClickListener {
                 item.vlogId?.let { id -> itemClick(id) }
             }
+        }
+
+        fun setImage(imgUri: String?, view: ImageView) {
+            Glide.with(view)
+                .load(imgUri)
+                .into(view)
         }
     }
 }

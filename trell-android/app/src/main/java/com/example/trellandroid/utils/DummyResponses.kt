@@ -10,6 +10,8 @@ object DummyResponses {
 
     val dummyUserResponse = UserResponse()
 
+    val dummyVlogResponse = VlogResponse()
+
     val  dummyPosts = listOf<VlogResponse>(
         VlogResponse(creatorName = "Title1", vlogId = 0L),
         VlogResponse(creatorName = "Title2", vlogId = 1L),
