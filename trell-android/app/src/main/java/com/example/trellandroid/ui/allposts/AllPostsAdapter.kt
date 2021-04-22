@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.trellandroid.R
 import com.example.trellandroid.data.responses.VlogResponse
 import com.example.trellandroid.databinding.HolderSinglePostBinding
 
@@ -48,9 +49,11 @@ class AllPostsAdapter(
             }
         }
 
-        fun setImage(imgUri: String?, view: ImageView) {
+        private fun setImage(imgUri: String?, view: ImageView) {
             Glide.with(view)
                 .load(imgUri)
+                .circleCrop()
+                .placeholder(R.drawable.bg_circle_img)
                 .into(view)
         }
     }

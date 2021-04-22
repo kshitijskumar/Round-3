@@ -29,7 +29,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                tools:src="@drawable/ic_image_holder"/>
+                android:src="@drawable/ic_image_holder"/>
 
             <ImageView
                 android:id="@+id/ivUser"
@@ -38,9 +38,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_margin="14dp"
-                tools:src="@drawable/ic_person_holder"
                 android:src="@drawable/ic_person_holder"
-                android:background="@drawable/bg_circle_img"/>
+                tools:background="@drawable/bg_circle_img"/>
 
             <TextView
                 android:id="@+id/tvName"

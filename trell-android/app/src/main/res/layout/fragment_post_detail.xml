@@ -22,7 +22,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_margin="12dp"
-        android:background="@drawable/ic_back" />
+        android:background="@drawable/ic_back"
+        android:backgroundTint="@color/light_grey"/>
 
     <TextView
         android:id="@+id/tvTitle"
@@ -73,7 +74,7 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:src="@drawable/ic_person_holder"
-                android:background="@drawable/bg_circle_img"
+                tools:background="@drawable/bg_circle_img"
                 android:layout_margin="8dp"/>
 
         </LinearLayout>

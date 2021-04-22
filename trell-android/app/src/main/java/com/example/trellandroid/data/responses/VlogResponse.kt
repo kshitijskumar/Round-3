@@ -6,5 +6,5 @@ data class VlogResponse(
     val tags: List<String> = listOf(),
     val creatorName: String = "Unnamed",
     val creatorImgUrl: String? = null,
-    val creatorId: Double? = null
+    val creatorId: Long? = null
 )

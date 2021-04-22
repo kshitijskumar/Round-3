@@ -11,8 +11,8 @@ interface MainRepository {
     suspend fun setInterestScore(vlogId: Double, score: Int = 1) : Result<Unit>
 
     //demo functions that won't be calling any api in MVP but will be required in actual app
-    suspend fun fetchAllComments(vlogId: Double) : Result<List<CommentResponse>>
-    suspend fun getProfile(userId: Double) : Result<UserResponse>
+    suspend fun fetchAllComments(vlogId: Long) : Result<List<CommentResponse>>
+    suspend fun getProfile(userId: Long) : Result<UserResponse>
     suspend fun getVlogDetails(vlogId: Long) : Result<VlogResponse>
 
 

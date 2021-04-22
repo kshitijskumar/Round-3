@@ -4,6 +4,6 @@ data class CommentResponse(
     val name: String = "Unnamed",
     val userImg: String? = null,
     val comment: String? = null,
-    val userId: Double? = null,
-    val vlogId: Double? = null
+    val userId: Long? = null,
+    val vlogId: Long? = null
 )

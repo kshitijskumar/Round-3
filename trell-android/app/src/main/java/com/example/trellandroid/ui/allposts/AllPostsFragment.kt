@@ -42,7 +42,7 @@ class AllPostsFragment : Fragment() {
             layoutManager = GridLayoutManager(requireContext(), 2)
             adapter = this@AllPostsFragment.adapter
         }
-        adapter.submitList(DummyResponses.dummyPosts)
+        adapter.submitList(DummyResponses.dummyUserPosts)
     }
 
 
