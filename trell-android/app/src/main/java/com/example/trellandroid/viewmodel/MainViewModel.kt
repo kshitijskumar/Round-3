@@ -4,13 +4,16 @@ import androidx.lifecycle.*
 import com.example.trellandroid.data.api.ApiService
 import com.example.trellandroid.data.repositories.MainRepository
 import com.example.trellandroid.data.repositories.repoimpl.MainRepositoryImpl
+import com.example.trellandroid.data.responses.CommentResponse
 import com.example.trellandroid.data.responses.UserResponse
 import com.example.trellandroid.data.responses.VlogResponse
+import com.example.trellandroid.utils.Constants.COMMENT_SCORE
 import com.example.trellandroid.utils.Constants.LIKE_SCORE
 import com.example.trellandroid.utils.Constants.PROFILE_SCORE
 import com.example.trellandroid.utils.Constants.WATCH_SCORE
 import com.example.trellandroid.utils.Result
 import kotlinx.coroutines.launch
+import org.w3c.dom.Comment
 
 @Suppress("UNCHECKED_CAST")
 class MainViewModel(
@@ -30,6 +33,9 @@ class MainViewModel(
         get() = _userDetails
 
 
+    private var _comments = MutableLiveData<Result<List<CommentResponse>>>()
+    val comments : LiveData<Result<List<CommentResponse>>>
+        get() = _comments
 
     fun getAllVlogs() = viewModelScope.launch {
         _allPosts.value = Result.Loading
@@ -60,6 +66,19 @@ class MainViewModel(
         //repo.notifyLike(vlogId)
 
         repo.setInterestScore(vlogId, LIKE_SCORE)
+    }
+
+    fun getAllComments(vlogId: Long) = viewModelScope.launch {
+        _comments.value = Result.Loading
+        val vlogComments = repo.fetchAllComments(vlogId)
+        _comments.value = vlogComments
+    }
+
+    fun postComment(vlogId: Long, text: String) = viewModelScope.launch {
+        //main-repository would be having a function to actually post a comment
+        //we'll add the user's comment to the existing comment list so that they can instantly see their comment
+
+        repo.setInterestScore(vlogId, COMMENT_SCORE)
     }
 
     companion object {

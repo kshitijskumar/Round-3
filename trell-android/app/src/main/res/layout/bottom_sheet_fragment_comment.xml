@@ -50,32 +50,35 @@
         android:id="@+id/llSingleComment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@id/llCommentBox"
-        app:layout_constraintStart_toStartOf="@id/llCommentBox"
-        app:layout_constraintEnd_toEndOf="@id/llCommentBox"
         android:layout_marginBottom="24dp"
+        android:orientation="horizontal"
         android:visibility="gone"
-        tools:visibility="visible">
+        app:layout_constraintBottom_toTopOf="@id/llCommentBox"
+        app:layout_constraintEnd_toEndOf="@id/llCommentBox"
+        app:layout_constraintStart_toStartOf="@id/llCommentBox"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible"
+        app:layout_constraintVertical_bias="1"
+        android:layout_marginTop="18dp">
 
         <ImageView
             android:id="@+id/ivUser"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:src="@drawable/bg_circle_img"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:src="@drawable/bg_circle_img" />
 
         <TextView
             android:id="@+id/tvComment"
+            style="@style/TextAppearance.MaterialComponents.Body2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            tools:text="This is a nice video."
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
             android:layout_weight="1"
             android:background="@drawable/bg_curve_edittext"
-            android:layout_gravity="center"
             android:padding="8dp"
-            android:layout_margin="8dp"
-            style="@style/TextAppearance.MaterialComponents.Body2"/>
+            tools:text="This is a nice video." />
 
     </LinearLayout>
 

@@ -80,7 +80,6 @@ class PostDetailFragment : Fragment() {
                 findNavController().navigate(
                         R.id.action_postDetailFragment_to_commentsBottomSheetFragment,
                         bundleOf(
-                                "userId" to userId,
                                 "vlogId" to vlogId
                             )
                         )
