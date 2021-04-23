@@ -19,6 +19,7 @@ class ProfileFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var userId: Long? = null
+    private var isInterest: Boolean = false
 
     private lateinit var adapter: AllPostsAdapter
 

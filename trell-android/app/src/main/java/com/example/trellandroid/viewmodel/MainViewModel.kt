@@ -42,14 +42,16 @@ class MainViewModel(
         _postDetails.value = Result.Loading
         val vlog = repo.getVlogDetails(vlogId)
         _postDetails.value = vlog
-        repo.setInterestScore(vlogId, WATCH_SCORE)
+//        repo.setInterestScore(vlogId, WATCH_SCORE)
     }
 
-    fun getUserProfile(vlogId: Long, userId: Long) = viewModelScope.launch {
+    fun getUserProfile(vlogId: Long, userId: Long, isInterest: Boolean = false) = viewModelScope.launch {
         _userDetails.value = Result.Loading
         val user = repo.getProfile(userId)
         _userDetails.value = user
-        repo.setInterestScore(vlogId, PROFILE_SCORE)
+        if(isInterest) {
+            repo.setInterestScore(vlogId, PROFILE_SCORE)
+        }
     }
 
     fun likeVlog(vlogId: Long) = viewModelScope.launch {

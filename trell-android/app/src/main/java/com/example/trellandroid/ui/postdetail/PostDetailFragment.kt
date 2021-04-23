@@ -11,13 +11,25 @@ import com.bumptech.glide.Glide
 import com.example.trellandroid.R
 import com.example.trellandroid.data.responses.VlogResponse
 import com.example.trellandroid.databinding.FragmentPostDetailBinding
+import com.example.trellandroid.utils.Result
+import com.example.trellandroid.utils.UtilsFunction.showToast
+import com.example.trellandroid.viewmodel.MainViewModel
 
 class PostDetailFragment : Fragment() {
 
     private var _binding : FragmentPostDetailBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var viewmodel: MainViewModel
+
     private var vlogId : Long? = null
     private var userId : Long? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        vlogId = arguments?.getLong("vlogId")
+        setupViewModel()
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentPostDetailBinding.inflate(inflater)
@@ -27,9 +39,15 @@ class PostDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        vlogId = arguments?.getLong("vlogId")
-
         setupViews()
+        observeValues()
+    }
+
+    private fun setupViewModel() {
+        viewmodel = MainViewModel.provideMainViewModel(this)
+        vlogId?.let {
+            viewmodel.getVlogDetails(it)
+        }
     }
 
     private fun setupViews() {
@@ -42,8 +60,34 @@ class PostDetailFragment : Fragment() {
             userId?.let {
                 findNavController().navigate(
                     R.id.action_postDetailFragment_to_profileFragment,
-                    bundleOf("userId" to userId)
+                    bundleOf("userId" to userId, "isInterest" to true)
                     )
+            }
+        }
+
+        binding.cbLike.setOnCheckedChangeListener { buttonView, isChecked ->
+            if(isChecked) {
+                vlogId?.let {
+                    viewmodel.likeVlog(it)
+                }
+            }
+        }
+    }
+
+    private fun observeValues() {
+        viewmodel.postDetails.observe(viewLifecycleOwner) {
+            when(it) {
+                is Result.Success -> {
+                    hideLoading()
+                    showVlogDetails(it.data)
+                }
+                is Result.Error -> {
+                    hideLoading()
+                    requireContext().showToast(it.errorMsg)
+                }
+                is Result.Loading -> {
+                    showLoading()
+                }
             }
         }
     }
@@ -57,6 +101,21 @@ class PostDetailFragment : Fragment() {
             .circleCrop()
             .placeholder(R.drawable.bg_circle_img)
             .into(binding.ivUser)
+
+    }
+
+    private fun showLoading() {
+        binding.apply {
+            cbPlayPause.visibility = View.GONE
+            progressBar.visibility = View.VISIBLE
+        }
+    }
+
+    private fun hideLoading() {
+        binding.apply {
+            cbPlayPause.visibility = View.VISIBLE
+            progressBar.visibility = View.GONE
+        }
     }
 
 
