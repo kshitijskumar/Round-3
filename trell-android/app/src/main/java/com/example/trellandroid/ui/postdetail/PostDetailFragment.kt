@@ -55,17 +55,19 @@ class PostDetailFragment : Fragment() {
             findNavController().navigateUp()
         }
         binding.ivUser.setOnClickListener {
-            //to be removed
-            userId = 0L
             userId?.let {
                 findNavController().navigate(
                     R.id.action_postDetailFragment_to_profileFragment,
-                    bundleOf("userId" to userId, "isInterest" to true)
+                    bundleOf(
+                            "userId" to userId,
+                            "isInterest" to true,
+                            "vlogId" to vlogId
+                            )
                     )
             }
         }
 
-        binding.cbLike.setOnCheckedChangeListener { buttonView, isChecked ->
+        binding.cbLike.setOnCheckedChangeListener { _, isChecked ->
             if(isChecked) {
                 vlogId?.let {
                     viewmodel.likeVlog(it)
@@ -93,6 +95,7 @@ class PostDetailFragment : Fragment() {
     }
 
     private fun showVlogDetails(vlog: VlogResponse) {
+        userId = vlog.creatorId
         binding.apply {
             tvTitle.text = vlog.title
         }

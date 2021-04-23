@@ -30,17 +30,17 @@ class MainRepositoryImpl(
 
     //these two functions will have a delay of 2 sec and then return dummy result
     override suspend fun fetchAllComments(vlogId: Long): Result<List<CommentResponse>> {
-        delay(2000L)
+        delay(1000L)
         return Result.Success(DummyResponses.dummyListOfComments)
     }
 
     override suspend fun getProfile(userId: Long): Result<UserResponse> {
-        delay(2000L)
+        delay(1500L)
         return Result.Success(DummyResponses.dummyUserResponse)
     }
 
     override suspend fun getVlogDetails(vlogId: Long): Result<VlogResponse> {
-        delay(2000L)
+        delay(1500L)
         return Result.Success(DummyResponses.dummyVlogResponse)
     }
 }

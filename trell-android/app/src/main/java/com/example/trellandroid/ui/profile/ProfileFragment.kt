@@ -12,17 +12,32 @@ import com.example.trellandroid.data.responses.UserResponse
 import com.example.trellandroid.databinding.FragmentProfileBinding
 import com.example.trellandroid.ui.allposts.AllPostsAdapter
 import com.example.trellandroid.utils.DummyResponses
+import com.example.trellandroid.utils.Result
+import com.example.trellandroid.utils.UtilsFunction.showToast
+import com.example.trellandroid.viewmodel.MainViewModel
 
 class ProfileFragment : Fragment() {
 
     private var _binding : FragmentProfileBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var viewModel: MainViewModel
+
     private var userId: Long? = null
     private var isInterest: Boolean = false
+    private var vlogId: Long? = null
 
     private lateinit var adapter: AllPostsAdapter
 
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        userId = arguments?.getLong("userId")
+        vlogId = arguments?.getLong("vlogId")
+        isInterest = arguments?.getBoolean("isInterest", false) ?: false
+
+        setupViewModel()
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentProfileBinding.inflate(inflater)
@@ -32,11 +47,34 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        userId = arguments?.getLong("userId")
-
-        //to be change to observing
-        showProfile(DummyResponses.dummyUserResponse)
+        observeValues()
     }
+
+    private fun setupViewModel() {
+        viewModel = MainViewModel.provideMainViewModel(this)
+        userId?.let {
+            viewModel.getUserProfile(vlogId!!, it, isInterest)
+        }
+    }
+
+    private fun observeValues() {
+        viewModel.userDetails.observe(viewLifecycleOwner) {
+            when(it) {
+                is Result.Success -> {
+                    hideLoading()
+                    showProfile(it.data)
+                }
+                is Result.Error -> {
+                    hideLoading()
+                    requireContext().showToast(it.errorMsg)
+                }
+                is Result.Loading -> {
+                    showLoading()
+                }
+            }
+        }
+    }
+
 
     private fun showProfile(user: UserResponse) {
         binding.apply {
@@ -64,6 +102,14 @@ class ProfileFragment : Fragment() {
 
         //this is the dummy response of the user's post
         adapter.submitList(DummyResponses.dummyUserPosts)
+    }
+
+    private fun showLoading() {
+        binding.progressBar.visibility = View.VISIBLE
+    }
+
+    private fun hideLoading() {
+        binding.progressBar.visibility = View.GONE
     }
 
 

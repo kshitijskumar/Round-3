@@ -19,13 +19,13 @@ object DummyResponses {
         DUMMY_USER_IMG_URL
     )
 
-    val dummyVlogResponse = VlogResponse()
+    val dummyVlogResponse = VlogResponse(creatorId = 0L)
 
     val  dummyUserPosts = listOf<VlogResponse>(
-        VlogResponse(creatorName = "Mellon Husk", vlogId = 0L),
-        VlogResponse(creatorName = "Mellon Husk", vlogId = 1L),
-        VlogResponse(creatorName = "Mellon Husk", vlogId = 2L),
-        VlogResponse(creatorName = "Mellon Husk", vlogId = 3L),
-        VlogResponse(creatorName = "Mellon Husk", vlogId = 4L)
+        VlogResponse(creatorName = "Mellon Husk", vlogId = 0L, creatorId = 0L),
+        VlogResponse(creatorName = "Mellon Husk", vlogId = 1L, creatorId = 0L),
+        VlogResponse(creatorName = "Mellon Husk", vlogId = 2L, creatorId = 0L),
+        VlogResponse(creatorName = "Mellon Husk", vlogId = 3L, creatorId = 0L),
+        VlogResponse(creatorName = "Mellon Husk", vlogId = 4L, creatorId = 0L)
     )
 }
