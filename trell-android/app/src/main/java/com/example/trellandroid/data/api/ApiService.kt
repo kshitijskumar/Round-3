@@ -11,7 +11,7 @@ interface ApiService {
 
     suspend fun getAllVlogs() : Response<List<VlogResponse>>
 
-    suspend fun setInterestScore(vlogId: Double, score: Int) : Response<Unit>
+    suspend fun setInterestScore(vlogId: Long, score: Int) : Response<Unit>
 
     companion object {
         private val loggingInterceptor = HttpLoggingInterceptor().apply {

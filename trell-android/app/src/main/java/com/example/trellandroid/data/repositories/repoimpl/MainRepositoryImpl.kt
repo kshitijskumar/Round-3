@@ -19,7 +19,7 @@ class MainRepositoryImpl(
         api.getAllVlogs()
     }
 
-    override suspend fun setInterestScore(vlogId: Double, score: Int) = safeApiCall {
+    override suspend fun setInterestScore(vlogId: Long, score: Int) = safeApiCall {
         api.setInterestScore(vlogId, score)
     }
 
