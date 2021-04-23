@@ -40,6 +40,9 @@ class CommentsBottomSheetFragment : BottomSheetDialogFragment() {
 
     private fun setupViewModel() {
         viewModel = MainViewModel.provideMainViewModel(this)
+        vlogId?.let {
+            viewModel.getAllComments(it)
+        }
     }
 
     private fun setupViews() {

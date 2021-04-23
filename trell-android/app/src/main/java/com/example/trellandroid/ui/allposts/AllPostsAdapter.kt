@@ -43,18 +43,26 @@ class AllPostsAdapter(
             binding.apply {
                 tvName.text = item.creatorName
                 setImage(item.creatorImgUrl, binding.ivUser)
+                setImage(item.vlogUrl, binding.ivPost, false)
             }
             binding.root.setOnClickListener {
                 item.vlogId?.let { id -> itemClick(id) }
             }
         }
 
-        private fun setImage(imgUri: String?, view: ImageView) {
-            Glide.with(view)
+        private fun setImage(imgUri: String?, view: ImageView, isProfile: Boolean = true) {
+
+            val result = Glide.with(view)
                 .load(imgUri)
-                .circleCrop()
-                .placeholder(R.drawable.bg_circle_img)
-                .into(view)
+
+            if(isProfile) {
+                result.circleCrop()
+                        .placeholder(R.drawable.bg_circle_img)
+                        .into(view)
+            }else {
+                result.placeholder(R.drawable.ic_image_holder)
+                        .into(view)
+            }
         }
     }
 }

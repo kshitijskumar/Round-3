@@ -8,5 +8,6 @@ data class VlogResponse(
     val tags: List<String> = listOf(),
     val creatorName: String = "Unnamed",
     val creatorImgUrl: String = DUMMY_USER_IMG_URL,
-    val creatorId: Long? = null
+    val creatorId: Long? = null,
+    val vlogUrl: String? = null
 )

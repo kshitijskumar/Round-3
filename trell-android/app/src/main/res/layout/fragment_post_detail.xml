@@ -13,7 +13,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:scaleType="fitXY"/>
 
     <ImageButton
         android:id="@+id/btnBack"
@@ -30,6 +31,8 @@
         style="@style/TextAppearance.MaterialComponents.Body1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        tools:textColor="@color/black"
         android:layout_margin="24dp"
         android:padding="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -53,6 +56,13 @@
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
             android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/btnSave"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_save"/>
 
             <ImageButton
                 android:id="@+id/btnComment"

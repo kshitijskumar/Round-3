@@ -1,5 +1,6 @@
 package com.example.trellandroid.data.repositories.repoimpl
 
+import android.util.Log
 import com.example.trellandroid.data.api.ApiService
 import com.example.trellandroid.data.repositories.BaseRepository
 import com.example.trellandroid.data.repositories.MainRepository
@@ -25,6 +26,7 @@ class MainRepositoryImpl(
     }
 
     override suspend fun setInterestScore(vlogId: Long, score: Int) = safeApiCall {
+        Log.d("SetScoreFunc", "Called with score: $score")
         api.setInterestScore(vlogId, score)
     }
 

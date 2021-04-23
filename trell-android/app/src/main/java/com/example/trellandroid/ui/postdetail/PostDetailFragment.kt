@@ -85,6 +85,13 @@ class PostDetailFragment : Fragment() {
                         )
             }
         }
+
+        binding.btnSave.setOnClickListener {
+            vlogId?.let {
+                viewmodel.saveVlog(it)
+                requireContext().showToast("Saved")
+            }
+        }
     }
 
     private fun observeValues() {
@@ -116,6 +123,10 @@ class PostDetailFragment : Fragment() {
             .placeholder(R.drawable.bg_circle_img)
             .into(binding.ivUser)
 
+        Glide.with(requireContext())
+                .load(vlog.vlogUrl)
+                .placeholder(R.drawable.ic_image_holder)
+                .into(binding.ivPost)
     }
 
     private fun showLoading() {

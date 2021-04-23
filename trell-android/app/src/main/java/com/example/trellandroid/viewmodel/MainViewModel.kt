@@ -10,6 +10,7 @@ import com.example.trellandroid.data.responses.VlogResponse
 import com.example.trellandroid.utils.Constants.COMMENT_SCORE
 import com.example.trellandroid.utils.Constants.LIKE_SCORE
 import com.example.trellandroid.utils.Constants.PROFILE_SCORE
+import com.example.trellandroid.utils.Constants.SAVE_SCORE
 import com.example.trellandroid.utils.Constants.WATCH_SCORE
 import com.example.trellandroid.utils.Result
 import kotlinx.coroutines.launch
@@ -48,7 +49,7 @@ class MainViewModel(
         _postDetails.value = Result.Loading
         val vlog = repo.getVlogDetails(vlogId)
         _postDetails.value = vlog
-//        repo.setInterestScore(vlogId, WATCH_SCORE)
+        repo.setInterestScore(vlogId, WATCH_SCORE)
     }
 
     fun getUserProfile(vlogId: Long, userId: Long, isInterest: Boolean = false) = viewModelScope.launch {
@@ -72,6 +73,14 @@ class MainViewModel(
         _comments.value = Result.Loading
         val vlogComments = repo.fetchAllComments(vlogId)
         _comments.value = vlogComments
+    }
+
+    fun saveVlog(vlogId: Long) = viewModelScope.launch {
+
+        //a function in the repository would be called to notify the backend about the save
+        //repo.saveVlog(vlogId)
+
+        repo.setInterestScore(vlogId, SAVE_SCORE)
     }
 
     fun postComment(vlogId: Long, text: String) = viewModelScope.launch {
