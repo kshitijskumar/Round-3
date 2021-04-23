@@ -74,6 +74,18 @@ class PostDetailFragment : Fragment() {
                 }
             }
         }
+
+        binding.btnComment.setOnClickListener {
+            vlogId?.let {
+                findNavController().navigate(
+                        R.id.action_postDetailFragment_to_commentsBottomSheetFragment,
+                        bundleOf(
+                                "userId" to userId,
+                                "vlogId" to vlogId
+                            )
+                        )
+            }
+        }
     }
 
     private fun observeValues() {
