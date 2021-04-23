@@ -15,8 +15,13 @@ class MainRepositoryImpl(
 ) : BaseRepository(), MainRepository {
 
     //these two functions actually call an api to perform task
-    override suspend fun fetchAllVlogs(): Result<List<VlogResponse>> = safeApiCall {
-        api.getAllVlogs()
+//    override suspend fun fetchAllVlogs(): Result<List<VlogResponse>> = safeApiCall {
+//        api.getAllVlogs()
+//    }
+
+    override suspend fun fetchAllVlogs(): Result<List<VlogResponse>> {
+        delay(2000L)
+        return Result.Success(DummyResponses.dummyUserPosts)
     }
 
     override suspend fun setInterestScore(vlogId: Long, score: Int) = safeApiCall {

@@ -11,6 +11,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.trellandroid.R
 import com.example.trellandroid.databinding.FragmentAllPostsBinding
 import com.example.trellandroid.utils.DummyResponses
+import com.example.trellandroid.utils.Result
+import com.example.trellandroid.utils.UtilsFunction.showToast
+import com.example.trellandroid.viewmodel.MainViewModel
 
 class AllPostsFragment : Fragment() {
 
@@ -18,6 +21,13 @@ class AllPostsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var adapter: AllPostsAdapter
+
+    private lateinit var viewModel : MainViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setupViewModel()
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentAllPostsBinding.inflate(inflater)
@@ -28,6 +38,13 @@ class AllPostsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()
+        setupViews()
+        observeValues()
+    }
+
+    private fun setupViewModel() {
+        viewModel = MainViewModel.provideMainViewModel(this)
+        viewModel.getAllVlogs()
     }
 
     private fun setupRecyclerView() {
@@ -42,9 +59,41 @@ class AllPostsFragment : Fragment() {
             layoutManager = GridLayoutManager(requireContext(), 2)
             adapter = this@AllPostsFragment.adapter
         }
-        adapter.submitList(DummyResponses.dummyUserPosts)
     }
 
+    private fun setupViews() {
+        binding.swipeRefresh.setOnRefreshListener {
+            viewModel.getAllVlogs()
+        }
+    }
+
+    private fun observeValues() {
+        viewModel.allPosts.observe(viewLifecycleOwner) {
+            when(it) {
+                is Result.Success -> {
+                    stopRefresh()
+                    adapter.submitList(it.data)
+                }
+
+                is Result.Error -> {
+                    stopRefresh()
+                    requireContext().showToast(it.errorMsg)
+                }
+
+                is Result.Loading -> {
+                    showRefresh()
+                }
+            }
+        }
+    }
+
+    private fun showRefresh() {
+        binding.swipeRefresh.isRefreshing = true
+    }
+
+    private fun stopRefresh() {
+        binding.swipeRefresh.isRefreshing = false
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

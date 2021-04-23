@@ -1,6 +1,7 @@
 package com.example.trellandroid.viewmodel
 
 import androidx.lifecycle.*
+import com.example.trellandroid.data.api.ApiService
 import com.example.trellandroid.data.repositories.MainRepository
 import com.example.trellandroid.data.repositories.repoimpl.MainRepositoryImpl
 import com.example.trellandroid.data.responses.UserResponse
@@ -55,7 +56,6 @@ class MainViewModel(
 
         //a function in the repository would be called to notify the backend about the like
         //repo.notifyLike(vlogId)
-
 
         repo.setInterestScore(vlogId, LIKE_SCORE)
     }
