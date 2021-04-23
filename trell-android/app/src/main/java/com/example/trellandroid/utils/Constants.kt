@@ -11,4 +11,5 @@ object Constants {
     const val COMMENT_SCORE = 3
     const val SAVE_SCORE = 4
     const val PROFILE_SCORE = 5
+
 }
