@@ -2,60 +2,60 @@ const mongoose = require('mongoose');
 
 // HOW DATA IS FORMATTED IN MONGODB
 const postSchema = mongoose.Schema({
-    Age18To24 : { 
-                type : Number,
+    creatorName : { 
+                type : String,
                 required : true
             },
-    Age24To30 : { 
-                type : Number,
+    vlogId : { 
+                type : String,
                 required : true
             },
-    Age30plus : { 
-                type : Number,
+    creatorId : { 
+                type : String,
                 required : true
             },
     AgeUnder18 : { 
                 type : Number,
-                required : true
+                required : false
             },
      gender0 : { 
                 type : Number,
-                required : true
+                required : false
             },
      gender1 : { 
                 type : Number,
-                required : true
+                required : false
             },
       gender2 : { 
                 type : Number,
-                required : true
+                required : false
             },
       tier1 : { 
                 type : Number,
-                required : true
+                required : false
             },
        tier2 : { 
                 type : Number,
-                required : true
+                required : false
             },
        tier3 : { 
                 type : Number,
-                required : true
+                required : false
             },
        userId : { 
                 type : Number,
-                required : true
+                required : false
             },
        trailId : { 
                 type : Number,
-                required : true
+                required : false
             },
        event_type : { 
                 type : String,
-                required : true
+                required : false
             },
        
-    url : {
+    vlogurl : {
                 type : String,
                 required : true
     }      

@@ -8,20 +8,10 @@ router.post('/', async(req,res) =>{
     // console.log(req.body,"hello");
 
     const post = new Post({
-	Age18To24: req.body.Age18To24,
-   	Age24To30: req.body.Age24To30,
-   	Age30plus: req.body.Age30plus,
-   	AgeUnder18: req.body.AgeUnder18,
-   	event_type: req.body.event_type,
-   	gender0: req.body.gender0,
-   	gender1: req.body.gender1,
-   	gender2: req.body.gender2,
-   	tier1: req.body.tier1,
-   	tier2: req.body.tier2,
-   	tier3: req.body.tier3,
-   	userId: req.body.userId,
-   	trailId: req.body.trailId,
-   	url: req.body.url
+	creatorName: req.body.creatorName,
+   	vlogId: req.body.vlogId,
+   	creatorId: req.body.creatorId,
+   	vlogurl: req.body.vlogurl
         
     }); 
 
